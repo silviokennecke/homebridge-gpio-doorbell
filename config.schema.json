@@ -1,5 +1,6 @@
 {
-  "pluginAlias": "GPIO Doorbell",
+  "pluginAlias": "GpioDoorbell",
+  "plugin": "GPIO Doorbell",
   "pluginType": "accessory",
   "singular": false,
   "schema": {

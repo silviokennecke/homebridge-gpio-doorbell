@@ -21,7 +21,7 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
     public readonly config: AccessoryConfig,
     public readonly api: API,
   ) {
-    this.log.debug('Example Accessory Plugin Loaded');
+    this.log.debug('Homebridge GPIO Doorbell loaded.');
 
     // your accessory must have an AccessoryInformation service
     this.informationService = new this.api.hap.Service.AccessoryInformation()
