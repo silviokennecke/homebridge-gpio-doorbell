@@ -22,6 +22,7 @@ This plugin listens the GPIO input of the Raspberry PI and passes it as a HomeKi
 
 | key | type | description |
 |---|---|---|
+| name | string | The name of the accessory. | 
 | gpioPin | integer | The GPIO pin the plugin should listen to. | 
 | reverseInput | boolean | If enabled, a high input on the gpio pin is interpreted as low and the other way around. |
 

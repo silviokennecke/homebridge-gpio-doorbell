@@ -1,7 +1,7 @@
 {
-  "pluginAlias": "ExampleHomebridgePlugin",
-  "pluginType": "platform",
-  "singular": true,
+  "pluginAlias": "GPIO Doorbell",
+  "pluginType": "accessory",
+  "singular": false,
   "schema": {
     "type": "object",
     "properties": {
@@ -9,7 +9,20 @@
         "title": "Name",
         "type": "string",
         "required": true,
-        "default": "Example Dynamic Platform"
+        "placeholder": "Doorbell"
+      },
+      "gpioPin": {
+        "title": "GPIO pin",
+        "description": "The GPIO pin that should be used as input.",
+        "type": "integer",
+        "required": true,
+        "placeholder": "e.g. 7 for GPIO 4"
+      },
+      "negateInput": {
+        "title": "Negate input",
+        "description": "If your circuit is NORMALLY CLOSED, set this to true.",
+        "type": "boolean",
+        "default": false
       }
     }
   }

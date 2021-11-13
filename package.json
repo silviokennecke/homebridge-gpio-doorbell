@@ -1,16 +1,16 @@
 {
   "private": true,
-  "displayName": "Plugin Name",
-  "name": "homebridge-plugin-name",
+  "displayName": "Homebridge GPIO Doorbell",
+  "name": "homebridge-gpio-doorbell",
   "version": "1.0.0",
-  "description": "A short description about what your plugin does.",
+  "description": "Use GPIO input as HomeKit doorbell",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/USERNAME/GITHUB_PROJECT_NAME.git"
+    "url": "git://github.com/silviokennecke/homebridge-gpio-doorbell.git"
   },
   "bugs": {
-    "url": "https://github.com/USERNAME/GITHUB_PROJECT_NAME/issues"
+    "url": "https://github.com/silviokennecke/homebridge-gpio-doorbell/issues"
   },
   "engines": {
     "node": ">=14.18.1",
@@ -26,9 +26,12 @@
   "keywords": [
     "homebridge-plugin"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "rpi-gpio": "^2.1.7"
+  },
   "devDependencies": {
     "@types/node": "^16.10.9",
+    "@types/rpi-gpio": "^2.1.1",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^8.0.1",
