@@ -9,7 +9,7 @@
 [![release](https://badgen.net/github/release/silviokennecke/homebridge-gpio-doorbell)](https://github.com/silviokennecke/homebridge-gpio-doorbell/releases)
 [![license](https://badgen.net/github/license/silviokennecke/homebridge-gpio-doorbell)](https://github.com/silviokennecke/homebridge-gpio-doorbell/blob/main/LICENSE)
 [![Node.js Package](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/publish.yml/badge.svg)](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/publish.yml)
-[![Node.js CI](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/build.yml)
+[![Node.js CI](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/build.yml/badge.svg)](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/build.yml)
 
 # Homebridge GPIO doorbell
 
