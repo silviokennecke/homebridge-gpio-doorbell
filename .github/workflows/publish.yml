@@ -5,7 +5,7 @@ on:
     types: [created]
 
 jobs:
-  build:
+  build-package:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
           CI: true
 
   publish-npm:
-    needs: build
+    needs: build-package
     runs-on: ubuntu-latest
 
     steps:
