@@ -1,6 +1,6 @@
 {
-  "pluginAlias": "GpioDoorbell",
-  "plugin": "GPIO Doorbell",
+  "pluginAlias": "GPIO Doorbell",
+  "plugin": "GpioDoorbell",
   "pluginType": "accessory",
   "singular": false,
   "schema": {
@@ -10,7 +10,8 @@
         "title": "Name",
         "type": "string",
         "required": true,
-        "placeholder": "Doorbell"
+        "placeholder": "Doorbell",
+        "default": "Doorbell"
       },
       "gpioPin": {
         "title": "GPIO pin",
