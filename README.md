@@ -8,8 +8,8 @@
 [![npm](https://badgen.net/npm/dt/homebridge-gpio-doorbell?label=downloads)](https://www.npmjs.com/package/homebridge-gpio-doorbell)
 [![release](https://badgen.net/github/release/silviokennecke/homebridge-gpio-doorbell)](https://github.com/silviokennecke/homebridge-gpio-doorbell/releases)
 [![license](https://badgen.net/github/license/silviokennecke/homebridge-gpio-doorbell)](https://github.com/silviokennecke/homebridge-gpio-doorbell/blob/main/LICENSE)
-[![Node.js Package](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/npm-publish.yml)
-[![Node.js CI](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/npm-test.yml/badge.svg?branch=main)](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/npm-test.yml)
+[![Node.js Package](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/publish.yml/badge.svg)](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/publish.yml)
+[![Node.js CI](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/silviokennecke/homebridge-gpio-doorbell/actions/workflows/build.yml)
 
 # Homebridge GPIO doorbell
 
