@@ -27,6 +27,17 @@ This plugin listens the GPIO input of the Raspberry PI and passes it as a HomeKi
 | throttleTime | number | How many milliseconds should another ring be ignored after the doorbell rang last? | 
 | reverseInput | boolean | If enabled, a high input on the gpio pin is interpreted as low and the other way around. |
 
+## Wiring
+
+To connect your doorbell to your PI via GPIO, connect a GPIO pin with GND and the button, relay, etc. and a resistor between.
+
+**In case of incorrect wiring you can damage your PI!**
+
+> :warning: Most doorbells run with 12V AC.
+> Therefore, you cannot attach your doorbell directly to your PI.
+> You will need a rectifier, capacitor and relay in between for instance.
+> The more easy way would be to directly use an AC relay.
+
 ## Support & Contribution
 
 This project is not commercially developed or maintained.
