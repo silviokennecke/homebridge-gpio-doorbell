@@ -63,14 +63,6 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
   private handlePinChange(gpioPin: number, circuitOpen: boolean): void {
     this.log.debug(`Pin ${gpioPin} changed state to ${circuitOpen}.`);
 
-    const now = Date.now();
-    if (this.lastRang && this.lastRang + this.config.throttleTime >= now) {
-      this.log.debug(`Ignoring state change on pin ${gpioPin} because throttle time has not expired.`);
-      return;
-    } else {
-      this.lastRang = Date.now();
-    }
-
     let buttonPushed = !circuitOpen;
 
     if (this.config.negateInput) {
@@ -78,6 +70,14 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
     }
 
     if (buttonPushed) {
+      const now = Date.now();
+      if (this.lastRang && (this.lastRang + this.config.throttleTime) >= now) {
+        this.log.debug(`Ignoring state change on pin ${gpioPin} because throttle time has not expired.`);
+        return;
+      } else {
+        this.lastRang = Date.now();
+      }
+
       this.log.info(`Doorbell "${this.config.name}" rang.`);
 
       this.doorbellService.updateCharacteristic(
