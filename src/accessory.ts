@@ -68,6 +68,8 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
     GPIO.setup(this.config.gpioPin, GPIO.DIR_IN, GPIO.EDGE_BOTH);
 
     if (this.config.enableOutput) {
+      this.log.debug(`Enable output on pin ${this.config.outputGpioPin}`);
+
       GPIO.setup(this.config.outputGpioPin, GPIO.DIR_LOW);
     }
   }
@@ -88,6 +90,8 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
 
     // handle GPIO output
     if (this.config.enableOutput) {
+      this.log.debug(`Setting GPIO pin ${this.config.outputGpioPin} to ${buttonPushed ? 'HIGH' : 'LOW'}`);
+
       GPIO.write(this.config.outputGpioPin, buttonPushed);
     }
 
@@ -112,6 +116,8 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
   }
 
   private handleMuteSet(value: boolean): void {
+    this.log.debug(`Set mute to ${value}.`);
+
     this.doorbellMute = value;
     this.storage.setItemSync(this.doorbellMuteKey, this.doorbellMute);
 
@@ -121,6 +127,8 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
   }
 
   private handleMuteGet(): boolean {
+    this.log.debug('Get mute.');
+
     if (this.doorbellMute === null) {
       const persisted = this.storage.getItemSync(this.doorbellMuteKey);
 
