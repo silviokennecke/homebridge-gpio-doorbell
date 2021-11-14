@@ -1,7 +1,7 @@
 {
   "name": "homebridge-gpio-doorbell",
   "displayName": "Homebridge GPIO Doorbell",
-  "version": "2.0.0-beta.5",
+  "version": "2.0.0-beta.6",
   "description": "Use GPIO input as HomeKit doorbell",
   "license": "Apache-2.0",
   "author": {

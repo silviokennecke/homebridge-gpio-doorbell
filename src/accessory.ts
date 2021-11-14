@@ -32,6 +32,7 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
   ) {
     this.log.debug('Homebridge GPIO Doorbell loaded.');
 
+    // init storage
     const cacheDir = this.api.user.persistPath();
     this.storage = storage.create();
     this.storage.initSync({dir: cacheDir, forgiveParseErrors: true});
@@ -53,6 +54,11 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
       this.muteCharacteristic.onGet(this.handleMuteGet.bind(this));
       this.muteCharacteristic.onSet(this.handleMuteSet.bind(this));
     }
+
+    // restore persisted settings
+    this.handleMuteGet();
+
+    // setup gpio
     this.setupGpio();
   }
 
@@ -89,7 +95,7 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
     }
 
     // handle GPIO output
-    if (this.config.enableOutput) {
+    if (this.config.enableOutput && !this.doorbellMute) {
       this.log.debug(`Setting GPIO pin ${this.config.outputGpioPin} to ${buttonPushed ? 'HIGH' : 'LOW'}`);
 
       GPIO.write(this.config.outputGpioPin, buttonPushed);
