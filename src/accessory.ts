@@ -36,7 +36,7 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
 
   private async setup(): Promise<void> {
     const cacheDir = this.api.user.persistPath();
-    this.storage = storage;
+    this.storage = storage.create();
     await this.storage.init({dir: cacheDir, forgiveParseErrors: true});
 
     // add accessory information
