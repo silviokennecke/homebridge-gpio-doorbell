@@ -23,7 +23,7 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
   private lastRang?: number;
 
   private readonly doorbellMuteKeyPrefix = 'homebridge-gpio-doorbell.mute.';
-  private doorbellMute = false;
+  private doorbellMute: boolean|null = null;
 
   constructor(
     public readonly log: Logger,
@@ -137,6 +137,6 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
       await this.handleMuteSet(!!persisted);
     }
 
-    return this.doorbellMute;
+    return this.doorbellMute as boolean;
   }
 }
