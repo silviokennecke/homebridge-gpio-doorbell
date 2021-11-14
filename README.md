@@ -24,8 +24,10 @@ This plugin listens the GPIO input of the Raspberry PI and passes it as a HomeKi
 |---|---|---|
 | name | string | The name of the accessory. | 
 | gpioPin | integer | The GPIO pin the plugin should listen to. | 
-| throttleTime | number | How many milliseconds should another ring be ignored after the doorbell rang last? | 
+| throttleTime | integer | How many milliseconds should another ring be ignored after the doorbell rang last? | 
 | reverseInput | boolean | If enabled, a high input on the gpio pin is interpreted as low and the other way around. |
+| enableOutput | boolean | If enabled, a doorbell ring causes a specified GPIO pin to be set HIGH simultaneously. |
+| outputGpioPin | integer | The output GPIO pin. |
 
 ## Wiring
 

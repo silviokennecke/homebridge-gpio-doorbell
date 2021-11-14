@@ -30,6 +30,22 @@
         "description": "If your circuit is NORMALLY CLOSED, set this to true.",
         "type": "boolean",
         "default": false
+      },
+      "enableOutput": {
+        "title": "Enable output",
+        "description": "This way you can easily keep your existing doorbell working or attach a buzzer or other component to your PI.",
+        "type": "boolean",
+        "default": false
+      },
+      "outputGpioPin": {
+        "title": "Output GPIO pin",
+        "description": "The GPIO pin that should be used for output, when the doorbell is ringing.",
+        "type": "integer",
+        "required": true,
+        "placeholder": "e.g. 7 for GPIO 4",
+        "condition": {
+          "functionBody": "return model.enableOutput === true;"
+        }
       }
     }
   }

@@ -53,6 +53,10 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
   setupGpio(): void {
     GPIO.on('change', (channel, value) => this.handlePinChange(channel, value));
     GPIO.setup(this.config.gpioPin, GPIO.DIR_IN, GPIO.EDGE_BOTH);
+
+    if (this.config.enableOutput) {
+      GPIO.setup(this.config.outputGpioPin, GPIO.DIR_LOW);
+    }
   }
 
   /**
@@ -69,7 +73,13 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
       buttonPushed = !buttonPushed;
     }
 
+    // handle GPIO output
+    if (this.config.enableOutput) {
+      GPIO.write(this.config.outputGpioPin, buttonPushed, () => null);
+    }
+
     if (buttonPushed) {
+      // handle throttle time
       const now = Date.now();
       if (this.lastRang && (this.lastRang + this.config.throttleTime) >= now) {
         this.log.debug(`Ignoring state change on pin ${gpioPin} because throttle time has not expired.`);
@@ -78,6 +88,7 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
         this.lastRang = Date.now();
       }
 
+      // forward ring to homekit
       this.log.info(`Doorbell "${this.config.name}" rang.`);
 
       this.doorbellService.updateCharacteristic(
