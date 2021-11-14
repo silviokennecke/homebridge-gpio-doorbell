@@ -31,14 +31,23 @@ This plugin listens the GPIO input of the Raspberry PI and passes it as a HomeKi
 
 ## Wiring
 
-To connect your doorbell to your PI via GPIO, connect a GPIO pin with GND and the button, relay, etc. and a resistor between.
+> :warning: **In case of incorrect wiring you can damage your PI!**
 
-**In case of incorrect wiring you can damage your PI!**
+![Wiring Sample](docs/wiring.png)
+
+### Doorbell input
+
+To connect your doorbell to your PI via GPIO, connect a GPIO pin with GND and the button, relay, etc. and a resistor between.
 
 > :warning: Most doorbells run with 12V AC.
 > Therefore, you cannot attach your doorbell directly to your PI.
 > You will need a rectifier, capacitor and relay in between for instance.
 > The more easy way would be to directly use an AC relay.
+
+### Doorbell output
+
+Optionally you can add a separate output which is triggered when the doorbell rings.
+This way you can keep your existing bell working or add a separate buzzer for instance.
 
 ## Support & Contribution
 
