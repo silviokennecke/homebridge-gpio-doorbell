@@ -31,13 +31,10 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
     public readonly api: API,
   ) {
     this.log.debug('Homebridge GPIO Doorbell loaded.');
-    this.setup();
-  }
 
-  private async setup(): Promise<void> {
     const cacheDir = this.api.user.persistPath();
     this.storage = storage.create();
-    await this.storage.init({dir: cacheDir, forgiveParseErrors: true});
+    this.storage.initSync({dir: cacheDir, forgiveParseErrors: true});
 
     // add accessory information
     this.informationService = new this.api.hap.Service.AccessoryInformation()
@@ -114,27 +111,20 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
     }
   }
 
-  /**
-   * @param value
-   * @private
-   */
-  private async handleMuteSet(value: boolean): Promise<void> {
+  private handleMuteSet(value: boolean): void {
     this.doorbellMute = value;
-    await this.storage.setItem(this.doorbellMuteKey, this.doorbellMute);
+    this.storage.setItemSync(this.doorbellMuteKey, this.doorbellMute);
 
     if (!this.doorbellMute && this.config.enableOutput) {
       GPIO.write(this.config.outputGpioPin, false);
     }
   }
 
-  /**
-   * @private
-   */
-  private async handleMuteGet(): Promise<boolean> {
+  private handleMuteGet(): boolean {
     if (this.doorbellMute === null) {
-      const persisted = await this.storage.getItem(this.doorbellMuteKey);
+      const persisted = this.storage.getItemSync(this.doorbellMuteKey);
 
-      await this.handleMuteSet(!!persisted);
+      this.handleMuteSet(!!persisted);
     }
 
     return this.doorbellMute as boolean;
