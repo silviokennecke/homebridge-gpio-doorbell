@@ -66,6 +66,9 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
     const now = Date.now();
     if (this.lastRang && this.lastRang + this.config.throttleTime >= now) {
       this.log.debug(`Ignoring state change on pin ${gpioPin} because throttle time has not expired.`);
+      return;
+    } else {
+      this.lastRang = Date.now();
     }
 
     let buttonPushed = !circuitOpen;
