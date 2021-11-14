@@ -19,6 +19,12 @@
         "required": true,
         "placeholder": "e.g. 7 for GPIO 4"
       },
+      "throttleTime": {
+        "title": "Throttle time",
+        "description": "How many milliseconds should another ring be ignored after the doorbell rang last?",
+        "type": "number",
+        "default": 500
+      },
       "negateInput": {
         "title": "Negate input",
         "description": "If your circuit is NORMALLY CLOSED, set this to true.",
