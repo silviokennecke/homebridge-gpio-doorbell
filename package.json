@@ -7,6 +7,12 @@
   "author": {
     "name": "Silvio Kennecke"
   },
+  "funding": [
+    {
+      "type": "paypal",
+      "url": "https://paypal.me/diginize"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/silviokennecke/homebridge-gpio-doorbell.git"
