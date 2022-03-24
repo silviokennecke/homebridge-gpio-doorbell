@@ -4,9 +4,10 @@ import {
   Logger,
 } from 'homebridge';
 import storage from 'node-persist';
-
 import GPIO from 'rpi-gpio';
 import {AccessoryConfig} from 'homebridge/lib/bridgeService';
+import { AxiosError } from 'axios';
+const axios = require('axios');
 
 /**
  * HomebridgePlatform
@@ -87,7 +88,7 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
    * @param circuitOpen true when circuit is open, false if circuit is closed
    * @private
    */
-  private handlePinChange(gpioPin: number, circuitOpen: boolean): void {
+  private async handlePinChange(gpioPin: number, circuitOpen: boolean): Promise<void> {
     this.log.debug(`Pin ${gpioPin} changed state to ${circuitOpen}.`);
 
     let buttonPushed = !circuitOpen;
@@ -116,10 +117,26 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
       // forward ring to homekit
       this.log.info(`Doorbell "${this.config.name}" rang.`);
 
-      this.doorbellService.updateCharacteristic(
-        this.api.hap.Characteristic.ProgrammableSwitchEvent,
-        this.api.hap.Characteristic.ProgrammableSwitchEvent.SINGLE_PRESS,
-      );
+      if (!this.config.enableHttpTrigger || !this.config.httpTriggerUrl) {
+        // ring in homekit
+        this.doorbellService.updateCharacteristic(
+          this.api.hap.Characteristic.ProgrammableSwitchEvent,
+          this.api.hap.Characteristic.ProgrammableSwitchEvent.SINGLE_PRESS,
+        );
+      } else {
+        // ring via 3rd party plugin
+        const url = this.config.httpTriggerUrl;
+        this.log.info(`Performing request to webhook at ${url}.`);
+        try {
+          await axios.get(url);
+        } catch (e: any|AxiosError) {
+          if (e.response) {
+            this.log.error(`Request to webhook failed with status code ${e.response.status}: ${e.response.data}`);
+          } else {
+            this.log.error(`Request to webhook failed with message: ${e?.message}`);
+          }
+        }
+      }
     }
   }
 

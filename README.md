@@ -28,6 +28,8 @@ This plugin listens the GPIO input of the Raspberry PI and passes it as a HomeKi
 | reverseInput | boolean | If enabled, a high input on the gpio pin is interpreted as low and the other way around. |
 | enableOutput | boolean | If enabled, a doorbell ring causes a specified GPIO pin to be set HIGH simultaneously. |
 | outputGpioPin | integer | The output GPIO pin. |
+| enableHttpTrigger | boolean | Enables performing an HTTP GET request when the doorbell rang. This way you can use the doorbell implementation of plugins like homebridge-camera-ffmpeg or homebridge-camera-ui. Enabling this, causes the doorbell accessory exposed by this plugin to not ring. |
+| httpTriggerUrl | string | The URL the HTTP GET request should be performed to. |
 
 ## Wiring
 
