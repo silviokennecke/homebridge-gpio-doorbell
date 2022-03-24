@@ -118,6 +118,7 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
 
       if (!this.config.enableHttpTrigger || !this.config.httpTriggerUrl) {
         // ring in homekit
+        this.log.info(`Forwarding ring directly to HomeKit.`);
         this.doorbellService.updateCharacteristic(
           this.api.hap.Characteristic.ProgrammableSwitchEvent,
           this.api.hap.Characteristic.ProgrammableSwitchEvent.SINGLE_PRESS,
