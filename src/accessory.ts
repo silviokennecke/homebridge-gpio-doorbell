@@ -7,7 +7,7 @@ import storage from 'node-persist';
 import GPIO from 'rpi-gpio';
 import {AccessoryConfig} from 'homebridge/lib/bridgeService';
 import { AxiosError } from 'axios';
-const axios = require('axios');
+import axios from 'axios';
 
 /**
  * HomebridgePlatform
@@ -129,6 +129,7 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
         this.log.info(`Performing request to webhook at ${url}.`);
         try {
           await axios.get(url);
+        /* eslint-disable  @typescript-eslint/no-explicit-any */
         } catch (e: any|AxiosError) {
           if (e.response) {
             this.log.error(`Request to webhook failed with status code ${e.response.status}: ${e.response.data}`);
