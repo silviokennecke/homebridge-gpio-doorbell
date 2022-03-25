@@ -15,6 +15,8 @@
 
 This plugin listens the GPIO input of the Raspberry PI and passes it as a HomeKit doorbell.
 
+Alternatively you can use this plugin to trigger a doorbell exposed by [homebridge-camera-ffmpeg](https://www.npmjs.com/package/homebridge-camera-ffmpeg) or [homebridge-camera-ui](https://www.npmjs.com/package/homebridge-camera-ui).
+
 > :warning: This plugin is only designed for and tested on Raspberry PI.
 > There's no guarantee, the plugin works also on other boards equipped with GPIO!
 
@@ -50,6 +52,12 @@ To connect your doorbell to your PI via GPIO, connect a GPIO pin with GND and th
 
 Optionally you can add a separate output which is triggered when the doorbell rings.
 This way you can keep your existing bell working or add a separate buzzer for instance.
+
+### Add to camera
+
+Since version 2.1 you can also use this plugin to trigger a webhook. This way you can use the exposed doorbell by [homebridge-camera-ffmpeg](https://www.npmjs.com/package/homebridge-camera-ffmpeg) or [homebridge-camera-ui](https://www.npmjs.com/package/homebridge-camera-ui). Enabling the webhook will cause the doorbell exposed by this plugin to not be triggered anymore.
+
+For setup first open the `homebridge-camera-ffmpeg` plugin configuration and enable the HTTP Server under "Global Automation" by assigning a port (e.g. 8080) to it. Also, click the "Enable Doorbell" switch in "Automation" for the camera you want to use. Save the changes and open the `homebridge-gpio-doorbell` configuration. Enable the "Enable HTTP Webhook" option and enter the webhook url for triggering the ffmpeg doorbell (e.g. `http://127.0.0.1/doorbell?NameOfVideoCamera`). Save the configuration an restart homebridge. When ringing the doorbell now, your camera exposed by homebridge-camera-ffmpeg will ring and a video stream is shown in the push notification on your iPhone, Apple Watch, etc..
 
 ## Support & Contribution
 
