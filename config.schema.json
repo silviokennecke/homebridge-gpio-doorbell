@@ -57,7 +57,7 @@
         "title": "Camera plugin URL (webhook)",
         "description": "The URL the HTTP GET request should be performed to.",
         "type": "string",
-        "placeholder": "http://localhost:7272/doorbell?MyCam",
+        "placeholder": "http://localhost:8080/doorbell?MyCam",
         "format": "uri",
         "condition": {
           "functionBody": "return model.enableHttpTrigger === true;"
