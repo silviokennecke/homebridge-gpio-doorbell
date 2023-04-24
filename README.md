@@ -59,6 +59,13 @@ Since version 2.1 you can also use this plugin to trigger a webhook. This way yo
 
 For setup first open the `homebridge-camera-ffmpeg` plugin configuration and enable the HTTP Server under "Global Automation" by assigning a port (e.g. 8080) to it. Also, click the "Enable Doorbell" switch in "Automation" for the camera you want to use. Save the changes and open the `homebridge-gpio-doorbell` configuration. Enable the "Enable HTTP Webhook" option and enter the webhook url for triggering the ffmpeg doorbell (e.g. `http://127.0.0.1/doorbell?NameOfVideoCamera`). Save the configuration an restart homebridge. When ringing the doorbell now, your camera exposed by homebridge-camera-ffmpeg will ring and a video stream is shown in the push notification on your iPhone, Apple Watch, etc..
 
+
+### notes
+
+edit: 
+package.json
+package-lock
+
 ## Support & Contribution
 
 This project is not commercially developed or maintained.
