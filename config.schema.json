@@ -25,6 +25,12 @@
         "type": "number",
         "default": 500
       },
+      "debounceDelay": {
+        "title": "Debounce delay",
+        "description": "Delay in milliseconds to debounce input (only trigger if input is active for more than this delay).",
+        "type": "number",
+        "default": 50
+      },
       "negateInput": {
         "title": "Negate input",
         "description": "If your circuit is NORMALLY CLOSED, set this to true.",
