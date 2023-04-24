@@ -24,6 +24,8 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
 
   private readonly doorbellMuteKey = 'homebridge-gpio-doorbell.mute';
   private doorbellMute: boolean;
+  private debounceTimeout?: NodeJS.Timeout;
+  private debounceDelay: number;
 
   constructor(
     public readonly log: Logger,
@@ -62,6 +64,10 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
 
     // setup gpio
     this.setupGpio();
+    
+    // Default debounce delay is 50ms
+    this.debounceDelay = this.config.debounceDelay || 50; 
+
   }
 
   getServices() {
@@ -88,22 +94,28 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
    * @private
    */
   private async handlePinChange(gpioPin: number, circuitOpen: boolean): Promise<void> {
-    this.log.debug(`Pin ${gpioPin} changed state to ${circuitOpen}.`);
+   this.log.debug(`Pin ${gpioPin} changed state to ${circuitOpen}.`);
 
-    let buttonPushed = !circuitOpen;
+   let buttonPushed = !circuitOpen;
 
-    if (this.config.negateInput) {
-      buttonPushed = !buttonPushed;
+   if (this.config.negateInput) {
+    buttonPushed = !buttonPushed;
+   }
+
+   // Debounce logic
+   if (buttonPushed) {
+     if (this.debounceTimeout) {
+      clearTimeout(this.debounceTimeout);
     }
 
-    // handle GPIO output
-    if (this.config.enableOutput && !this.doorbellMute) {
-      this.log.debug(`Setting GPIO pin ${this.config.outputGpioPin} to ${buttonPushed ? 'HIGH' : 'LOW'}`);
+    this.debounceTimeout = setTimeout(async () => {
+      // handle GPIO output
+      if (this.config.enableOutput && !this.doorbellMute) {
+        this.log.debug(`Setting GPIO pin ${this.config.outputGpioPin} to ${buttonPushed ? 'HIGH' : 'LOW'}`);
 
-      GPIO.write(this.config.outputGpioPin, buttonPushed);
-    }
+        GPIO.write(this.config.outputGpioPin, buttonPushed);
+      }
 
-    if (buttonPushed) {
       // handle throttle time
       const now = Date.now();
       if (this.lastRang && (this.lastRang + this.config.throttleTime) >= now) {
@@ -138,8 +150,10 @@ export class GpioDoorbellAccessory implements AccessoryPlugin {
           }
         }
       }
-    }
+    }, this.debounceDelay); // Use the debounce delay from the user's config
   }
+}
+
 
   private handleMuteSet(value: boolean): void {
     this.log.debug(`Set mute to ${value}.`);
